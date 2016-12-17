@@ -1,0 +1,98 @@
+
+/*------ Logowanie ----------*/
+
+#loginPanel {margin-top: 10px !important}
+#loginPanel .loginArea {
+    margin: 3px 0;
+    display: block;
+}
+#loginPanel #userLoginName, #loginPanel #userLoginPassword{float:right}
+#loginPanel {margin-top: 20px;}
+#loginPanel #userLoginName, #loginPanel #userLoginPassword {float: right;}
+#loginPanel #userLoginSubmit {margin: 5px auto 0; display: flex; padding: 2px 19px}
+
+#loginPanel .right {
+    border-bottom: 1px solid #151515;
+    border-top: 1px solid #151515;
+    margin: 14px 0;
+    padding: 5px 0;
+    text-align: center;
+}
+#loginPanel .right a:before {
+    font-family: "FontAwesome",sans-serif;
+    font-size: 25px !important;
+}
+
+#loginPanel div.right a {
+    clear: both;
+    color: white;
+    display: inline-block;
+    font-size: 1.5em;
+    margin: 4px;
+    padding: 0.15em 0.3em;
+    text-align: center;
+    text-decoration: none;
+    width: 9em;
+}
+
+#loginPanel .right .facebook::before {content: "\f09a";}
+#loginPanel .right .twitter::before {content: "\f099";}
+#loginPanel .right .google-plus::before {content: "\f0d5";}
+
+#loginPanel div.right a.facebook {
+    background: #3a589a none repeat scroll 0 0;
+    margin-top: 0.8em;
+    transition: all 0.15s ease-in-out 0s;
+}
+#loginPanel div.right a.facebook:hover {
+    background: rgba(58, 88, 154, 0.8) none repeat scroll 0 0;
+}
+#loginPanel div.right a.twitter {
+    background: #4099ff none repeat scroll 0 0;
+    transition: all 0.15s ease-in-out 0s;
+}
+#loginPanel div.right a.twitter:hover {
+    background: rgba(64, 153, 255, 0.8) none repeat scroll 0 0;
+}
+#loginPanel div.right a.google-plus {
+    background: #e9544f none repeat scroll 0 0;
+    transition: all 0.15s ease-in-out 0s;
+}
+#loginPanel div.right a.google-plus:hover {
+    background: rgba(233, 84, 79, 0.8) none repeat scroll 0 0;
+}
+
+
+
+/*------ Nowe konto ----------*/
+
+#loginWidget #showSigninPanel {
+    border: 1px solid;
+    color: #c7c7c7;
+    cursor: pointer;
+    display: block;
+    font-size: 17px;
+    text-align: center;
+    width: 100%;
+    padding: 8px;
+}
+
+/*------ Login Dialog ----------*/
+
+#signinPanel {
+    font-family: Arial,Helvetica,sans-serif !important;
+    font-size: 16px !important;
+}
+
+#signinPanel label {
+    width: 20%;
+    padding: 7px 0;
+    display: inline-block;
+}
+#signinPanel input {
+    width: 68%;
+    float: right;
+    padding: 3px 2px;
+}
+
+/*------ End ----------*/

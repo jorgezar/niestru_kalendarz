@@ -1,0 +1,39 @@
+[
+	{
+		"id":1,
+		"value":"7:00 rano w dzień wizyty"
+	},
+	{
+		"id":2,
+		"value":"8:00 rano w dzień wizyty"
+	},
+	{
+		"id":3,
+		"value":"9:00 rano w dzień wizyty"
+	},
+	{
+		"id":4,
+		"value":"18:00 wieczór w przeddzień wizyty"
+	},
+	{
+		"id":5,
+		"value":"18:00 wieczór w przeddzień wizyty"
+	},
+	{
+		"id":6,
+		"value":"18:00 wieczór w przeddzień wizyty"
+	},
+	{
+		"id":7,
+		"value":"1 godzinę przed terminem"
+	},
+	{
+		"id":8,
+		"value":"1 godzinę przed terminem"
+	},
+	{
+		"id":9,
+		"value":"1 godzinę przed terminem"
+	}
+	
+]

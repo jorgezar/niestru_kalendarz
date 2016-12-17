@@ -1,0 +1,159 @@
+
+#panelcalendar {margin-top: 57px}
+
+
+* basic style definition */
+/* •••••••••••••••••••••••••••••••• */
+
+#panelcalendar body {
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+font-family: 'Roboto Slab', serif; }
+
+
+#panelcalendar h1 {
+margin: 0;
+user-select: none;
+text-align: center;
+font-weight: 300; }
+
+
+#panelcalendar p, {
+font-weight: 300;
+color: #546E7A;
+user-select: none;
+text-align: center;
+margin: 0; }
+
+
+#panelcalendar a { 
+text-align: center;
+text-decoration: none;
+color: #FFF; }
+
+.closepanelcontent {
+    border: 2px solid;
+    border-radius: 50px;
+    color: #fff;
+    display: block;
+    margin: 30px auto !important;
+    padding: 10px 50px;
+    text-align: center;
+    text-decoration: none;
+    width: 120px;
+}
+
+/* Navigation menu */
+/* •••••••••••••••••••••••••••••••• */
+
+.menu {
+    pointer-events: none;
+    text-align: center;
+    z-index: 200;
+    position: relative;
+}
+/* Menu link item */
+.menu__link {
+display: inline-block;
+text-decoration: none;
+border: 2px solid #263238;
+color: #263238 !important; 
+pointer-events: auto;
+line-height: 40px; 
+position: relative;
+padding: 0 50px; 
+box-sizing: border-box;
+margin: 25px 0 0;
+user-select: none;
+overflow: hidden;
+border-radius: 50px;
+
+  &:before {
+  content: attr(data-hover);
+  background-color: #263238; 
+  color: #FFF;
+  position: absolute;
+  top: 100%;
+  bottom: 0;
+  left: 0;
+  transition: all 300ms cubic-bezier(0.190, 1.000, 0.560, 1.000);
+  right: 0; }
+  
+
+  &:hover:before {
+  top: 0; }
+}
+
+/* Panels Style*/
+/* •••••••••••••••••••••••••••••••• */
+
+/* Common panel style */
+.panel {
+align-items: center;
+justify-content: center;
+flex-direction: column;
+position: absolute;
+top: 0;
+bottom: 0;
+left: 0;
+right: 0;
+overflow: hidden;
+z-index: 260;
+color: #000;
+box-sizing: border-box;
+}
+
+
+/* panel content (only for animation delay after open) */
+.panel-content {
+opacity: 0;
+will-change: margin-top;
+transition: all 700ms; 
+transition-delay: 600ms;
+padding: 10px 20px;
+ }
+
+/* Panel content animation after open */
+.panel:target .panel-content {
+opacity: 1;
+margin-top: 0; }
+
+
+/*  Specific "Home "panel */
+/* •••••••••••••••••••••••••••••••• */
+
+.panel#home {
+z-index: 1;
+  
+  /* Particle.js demo */
+  canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: block; }
+
+}
+
+
+/*  Specific panel "Slice" */
+/* •••••••••••••••••••••••••••••••• */
+
+.panel#slice {
+background-color: #E53935;
+transition: all 800ms cubic-bezier(0.190, 1.000, 0.560, 1.000);
+transform: translate3d( 0, -100%, 0 ); }
+
+.panel#slice:target {
+transform: translate3d( 0, 0, 0 ); }
+
+
+
+/* Sample Particle background */
+/* •••••••••••••••••••••••••••••••• */
+
+#particles {
+opacity: 0.6; }
+
+
