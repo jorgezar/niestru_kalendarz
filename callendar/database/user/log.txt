@@ -1,0 +1,8 @@
+jurekd8578edf8458ce06fbc5bb76a58c5ca4zarembajorge@wp.pl
+insert into users (`username`,`useremail`,`userpassword`,`user_level`) values ('jurek','zarembajorge@wp.pl','d8578edf8458ce06fbc5bb76a58c5ca4', '0')
+new user 4297f44b13955235245b2497399d7a93zgierzyjerzy@gmail.com
+insert into users (`username`,`useremail`,`userpassword`,`user_level`,`user_telephone`, `register_date`) values ('new user ','zgierzyjerzy@gmail.com','4297f44b13955235245b2497399d7a93', '0', '','')
+new user 4297f44b13955235245b2497399d7a93zgierzyjerzy@gmail.com
+insert into users (`username`,`useremail`,`userpassword`,`user_level`,`user_telephone`, `register_date`) values ('new user ','zgierzyjerzy@gmail.com','4297f44b13955235245b2497399d7a93', '0', '','1482258119')
+qweqweqwe4297f44b13955235245b2497399d7a93zgierzyjerzy@gmail.com
+insert into users (`username`,`useremail`,`userpassword`,`user_level`,`user_telephone`, `register_date`) values ('qweqweqwe','zgierzyjerzy@gmail.com','4297f44b13955235245b2497399d7a93', '0', '123123123','1482258161')

@@ -1,14 +1,5 @@
 
-@import "https://fonts.googleapis.com/css?family=Roboto:400,300,100&subset=latin,cyrillic-ext,latin-ext";
 
-.admincallendar {
-    display: inherit;
-    font-family: "Roboto",sans-serif !important;
-    font-weight: 300 !important;
-    margin: 0 auto;
-    max-width: 900px;
-		text-align: center;
-}
 .admincallendar h3 {
     color: #fff;
     text-shadow: 0 2px 1px #000;
@@ -22,101 +13,179 @@
     height: 100px !important;
     width: 98% !important;
 }
-
-
-/* Range Day */
-
 .selectRangeDay {
     display: block;
     margin: 0 auto;
     max-width: 500px;
 }
-
-.admincallendar .range-checkbox { clear:left; float:left; margin:13px 10px 10px; }
-.admincallendar .range-label { float:left; display:block; width:80px; margin:10px; cursor: pointer; }
-.admincallendar .range-slider { float:left; margin:10px; }
-.admincallendar .range-time { width:100px; float:left; margin:10px; }
-.admincallendar .range-day-disabled { opacity:.5; }
-.admincallendar .range-day .ui-slider-range { background: #269cae; }
-.admincallendar .range-day .ui-slider-handle { cursor:w-resize !important; }
-.admincallendar .range-day-disabled .ui-slider-range { background: #fff; }
-.admincallendar .range-day-disabled .ui-slider-handle { cursor:default !important; background:none !important; border:none !important; }
-.admincallendar .range-values { position:relative; display:block; height:20px; overflow:hidden; margin:10px 0 10px;display: none; }
-.admincallendar .range-values span { position: absolute; border-left: 1px solid grey; padding-left:5px }
-.admincallendar .range-values span.r-0 { left:0 }
-.admincallendar .range-values span.r-3 { left:12.5% }
-.admincallendar .range-values span.r-6 { left:25% }
-.admincallendar .range-values span.r-9 { left:37.5% }
-.admincallendar .range-values span.r-12 { left:50% }
-.admincallendar .range-values span.r-15 { left:62.5% }
-.admincallendar .range-values span.r-18 { left:75% }
-.admincallendar .range-values span.r-21 { left:87.5% }
-.admincallendar .range-values span.r-24 { left:100%;margin-left:-1px; }
-
-/* RESULT DATA STYLES */
-.admincallendar #schedule { width: 500px; background:#eee; margin-top:20px;display: none; }
-.admincallendar #schedule th { text-align: left;border-bottom:1px solid grey; }
-.admincallendar #schedule th,#schedule td { padding:5px; display: none}
-
-
-/* SERVICE */
-
-.EditService {}
-
+.admincallendar .range-checkbox {
+    clear: left;
+    float: left;
+    margin: 13px 10px 10px;
+}
+.admincallendar .range-label {
+    cursor: pointer;
+    display: block;
+    float: left;
+    margin: 10px;
+    width: 80px;
+}
+.admincallendar .range-slider {
+    float: left;
+    margin: 10px;
+}
+.admincallendar .range-time {
+    float: left;
+    margin: 10px;
+    width: 100px;
+}
+.admincallendar .range-day-disabled {
+    opacity: 0.5;
+}
+.admincallendar .range-day .ui-slider-range {
+    background: #269cae none repeat scroll 0 0;
+}
+.admincallendar .range-day .ui-slider-handle {
+    cursor: w-resize !important;
+}
+.admincallendar .range-day-disabled .ui-slider-range {
+    background: #fff none repeat scroll 0 0;
+}
+.admincallendar .range-day-disabled .ui-slider-handle {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0 !important;
+    border: medium none !important;
+    cursor: default !important;
+}
+.admincallendar .range-values {
+    display: none;
+    height: 20px;
+    margin: 10px 0;
+    overflow: hidden;
+    position: relative;
+}
+.admincallendar .range-values span {
+    border-left: 1px solid grey;
+    padding-left: 5px;
+    position: absolute;
+}
+.admincallendar .range-values span.r-0 {
+    left: 0;
+}
+.admincallendar .range-values span.r-3 {
+    left: 12.5%;
+}
+.admincallendar .range-values span.r-6 {
+    left: 25%;
+}
+.admincallendar .range-values span.r-9 {
+    left: 37.5%;
+}
+.admincallendar .range-values span.r-12 {
+    left: 50%;
+}
+.admincallendar .range-values span.r-15 {
+    left: 62.5%;
+}
+.admincallendar .range-values span.r-18 {
+    left: 75%;
+}
+.admincallendar .range-values span.r-21 {
+    left: 87.5%;
+}
+.admincallendar .range-values span.r-24 {
+    left: 100%;
+    margin-left: -1px;
+}
+.admincallendar #schedule {
+    background: #eee none repeat scroll 0 0;
+    display: none;
+    margin-top: 20px;
+    width: 500px;
+}
+.admincallendar #schedule th {
+    border-bottom: 1px solid grey;
+    text-align: left;
+}
+.admincallendar #schedule th, #schedule td {
+    display: none;
+    padding: 5px;
+}
+.EditService {
+}
 .EditService li {
     border: 1px dashed #fe6666;
     cursor: move;
+    display: inline-block;
     list-style: outside none none;
     margin: 10px 0;
     padding: 5px;
-    display: inline-block;
-		text-align: left;
+    text-align: left;
 }
-
 .EditService li::after {
     border-width: 0 1px;
     color: #fe6666;
-    content: "\f07d";
+    content: "\f047";
+    float: right;
     font-family: FontAwesome;
     font-size: 25px;
-    float: right;
     margin-right: 4px;
 }
-
-.EditService li:hover {box-shadow: 0px 1px 9px #8f0101}
-
-.EditService li .serviceName {width: 45%}
-.EditService li .serviceTime {width: 15%}
-.EditService li .serviceColor {}
-
-.EditService button, .EditService li .serviceColor {background: none;border: none}
-.EditService .deleteService::before {content: "\f014";font-family: FontAwesome;font-size: 20px;color:#fff}
-.EditService .saveService::before {content: "\f0c7";font-family: FontAwesome;font-size: 20px;color:#fff}
-
+.EditService li:hover {
+    box-shadow: 0 1px 9px #8f0101;
+}
+.EditService li .serviceName {
+    width: 45%;
+}
+.EditService li .serviceTime {
+    width: 15%;
+}
+.EditService li .serviceColor {
+}
+.EditService button, .EditService li .serviceColor {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    border: medium none;
+		cursor: pointer;
+}
+.EditService .deleteService::before {
+    color: #fff;
+    content: "\f014";
+    font-family: FontAwesome;
+    font-size: 20px;
+}
+.EditService .saveService::before {
+    color: #fff;
+    content: "\f0c7";
+    font-family: FontAwesome;
+    font-size: 20px;
+}
 @media screen and (max-width: 480px) {
-.EditService li {width: 80%}
-.EditService li .serviceName {width: 90%}
-.EditService li .serviceTime {width: 30%}
-.EditService li::after {float:right;font-size: 26px}
+.EditService li {
+    width: 80%;
+}
+.EditService li .serviceName {
+    width: 90%;
+}
+.EditService li .serviceTime {
+    width: 30%;
+}
+.EditService li::after {
+    float: right;
+    font-size: 26px;
+}
 }
 .AddNewService {
-    background: #bd1414;
+    background: #bd1414 none repeat scroll 0 0;
+    color: #fff;
     padding: 10px;
     text-align: center;
-		color: #fff;
 }
-
 .AddNewService button {
-    background: #e53935;
+    background: #e53935 none repeat scroll 0 0;
     border: 1px solid;
     color: #fff;
     margin-top: 14px;
     padding: 10px 30px;
 }
-
-
-/************ RADIO MINUTES************/
-
 .radiominutes {
     display: inline-block;
 }
@@ -125,28 +194,32 @@
     margin: 10px;
 }
 .radiominutes .inputchecked label {
-    font-weight: bold;
     color: #fff;
+    font-weight: bold;
     text-shadow: 1px 1px 2px #000;
 }
 .radiominutes rm {
-    background: #269cae;
-    height: 1px;
+    background: #269cae none repeat scroll 0 0;
     display: block;
+    height: 1px;
     margin-top: -41px;
 }
-
-@media screen and (max-width: 680px) {.radiominutes rm {display:none}}
-
-
-/************ PARAMS ************/
-
-.admincallendar .range-slider,.range-values {width: 37%;}
-
-@media screen and (max-width: 480px) {.admincallendar .range-slider, .range-values {width: 90%;}}
-
-.admincallendar .range-values,#schedule,h1 {margin-left: 143px}
-
-/* SMS */
-
-.admincallendar .hide{display:none}
+@media screen and (max-width: 680px) {
+.radiominutes rm {
+    display: none;
+}
+}
+.admincallendar .range-slider, .range-values {
+    width: 37%;
+}
+@media screen and (max-width: 480px) {
+.admincallendar .range-slider, .range-values {
+    width: 90%;
+}
+}
+.admincallendar .range-values, #schedule, h1 {
+    margin-left: 143px;
+}
+.admincallendar .hide {
+    display: none;
+}

@@ -68,6 +68,7 @@ $(document).ready(function() {
     $('<div></div>').appendTo('body')
         .html('<div><h6>'+serviceName+'</h6></div>')
         .dialog({
+		dialogClass : 'deleteServiceDialog',
         modal: true,
         opacity: 5.5,
         title: 'Czy usunąć usługę?',

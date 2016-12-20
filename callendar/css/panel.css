@@ -1,6 +1,12 @@
 
-#panelcalendar {margin-top: 57px}
+#panelcalendar {margin-top: 30px}
 
+.admincallendar {
+    max-width: 740px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 0 5px;
+}
 
 * basic style definition */
 /* •••••••••••••••••••••••••••••••• */
@@ -63,7 +69,7 @@ line-height: 40px;
 position: relative;
 padding: 0 50px; 
 box-sizing: border-box;
-margin: 25px 0 0;
+margin: 0;
 user-select: none;
 overflow: hidden;
 border-radius: 50px;
@@ -97,8 +103,8 @@ top: 0;
 bottom: 0;
 left: 0;
 right: 0;
-overflow: hidden;
-z-index: 260;
+overflow: auto;
+z-index: 999;
 color: #000;
 box-sizing: border-box;
 }

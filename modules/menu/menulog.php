@@ -4,8 +4,7 @@
 <meta charset='utf-8' />
 <link rel='stylesheet' href='css/template.css' />
 <link rel='stylesheet' href='css/font-awesome.css' />
-<link rel='stylesheet' href='css/jquery-ui.css' />
-<script src='js/jquerymenu.min.js'></script>
+<script src='js/jquery-3.1.1.min.js'></script>
 <script src='js/jquery-ui.min.js'></script>
 <script src='js/modernizr.js'></script>
 <meta name=viewport content="width=device-width, initial-scale=1">
@@ -27,6 +26,9 @@ $(document).ready(function(){
 });
 //]]>
 </script>
+
+
+<topik></topik>
 
 
 <header>

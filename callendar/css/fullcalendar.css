@@ -4,14 +4,12 @@
  * (c) 2016 Adam Shaw
  */
 
-
-body {background: radial-gradient(ellipse at center, rgba(255,255,255,1) 0%,#CFD8DC 100%)}
-
 #calendar {
     margin: 20px auto;
     max-width: 900px;
     position: relative;
-    z-index: 98;
+    z-index: 100;
+		padding:0 12px;
 }
  
  

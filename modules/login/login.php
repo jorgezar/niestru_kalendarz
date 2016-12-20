@@ -1,15 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset='utf-8' />
-<link rel='stylesheet' href='modules/login/login.css' />
-<link rel='stylesheet' href='css/font-awesome.css' />
-<script src='../niestru/callendar/lib/jquery-3.1.1.min.js'></script>
-<script src='../niestru/js/jquerymenu.min.js'></script>
-<script src='../niestru/js/jquery-ui.min.js'></script>
-<script src='../niestru/js/modernizr.js'></script>
-
-</head>
 <div class='login' id='loginWidget'>
 <?php 
 include_once("/home/jorgezar/domains/easypack1.hekko24.pl/public_html/niestru/callendar/database/connection.php");
@@ -117,16 +105,6 @@ $("#showSigninPanel").on('click', function(){
     </a>
   </div>
 </div>
-<span id='showSigninPanel'>Nowe konto</span>
-<div id ='signinPanel' style='display:none'>
-	
-		<label>Imię: </label>
-		<input id='newUserName' placeholder='imię' type='text'>
-		<label>Email:</label>
-		<input id='newUserEmail' placeholder='email' type='text'>
-		<label>Hasło:</label>
-		<input id='newUserPass1' placeholder='********' type='password'>
-		<label>Powtórz Hasło:</label>
-		<input id='newUserPass2' placeholder='********' type='password'>
-</div>
+<a href="newaccount.php"><span id='showSigninPanel'>Nowe konto</span></a>
+
 </div>
