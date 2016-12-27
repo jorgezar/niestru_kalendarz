@@ -6,3 +6,5 @@ new user 4297f44b13955235245b2497399d7a93zgierzyjerzy@gmail.com
 insert into users (`username`,`useremail`,`userpassword`,`user_level`,`user_telephone`, `register_date`) values ('new user ','zgierzyjerzy@gmail.com','4297f44b13955235245b2497399d7a93', '0', '','1482258119')
 qweqweqwe4297f44b13955235245b2497399d7a93zgierzyjerzy@gmail.com
 insert into users (`username`,`useremail`,`userpassword`,`user_level`,`user_telephone`, `register_date`) values ('qweqweqwe','zgierzyjerzy@gmail.com','4297f44b13955235245b2497399d7a93', '0', '123123123','1482258161')
+d41d8cd98f00b204e9800998ecf8427e
+insert into users (`username`,`useremail`,`userpassword`,`user_level`,`user_telephone`, `register_date`) values ('','','d41d8cd98f00b204e9800998ecf8427e', '0', '','1482675853')

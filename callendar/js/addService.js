@@ -1,9 +1,9 @@
-
+var databaseQueryPath = 'http://easypack1.hekko24.pl/niestru/callendar/database/query.php'
 
 $(document).ready(function() {
     var wrapper         = $(".input_fields_wrap"); //Fields wrapper
     var add_button      = $(".add_field_button"); //Add button ID
-	$.getJSON('/fullc/database/services.php', function(data){
+	$.getJSON('/niestru/callendar/database/services.php', function(data){
 		for (i in data){
 			var serviceId = data[i].serviceId;
 			var serviceName = data[i].serviceName;
@@ -35,9 +35,17 @@ $(document).ready(function() {
 			alert("proszę wprowadzić czas w minutach (można wprowadzić zero minut)");
 		}
 		if(valid){
+			var newService = {
+				'name' : serviceName,
+				'time' : serviceTime,
+				'color' : serviceColor
+			}
 		$.ajax({
-			url:'http://easypack1.hekko24.pl/fullc/database/addService.php',
-			data: {'name':serviceName, 'time':serviceTime, 'color':serviceColor},
+			url: databaseQueryPath,
+			data: {
+				'task' : 'addService',
+				'newServiceData' : newService
+				},
 			type:"POST",
 			success:function(){
 				alert('zapisałem');
@@ -48,21 +56,24 @@ $(document).ready(function() {
     });
     //called when save service to database icon is clicked on the front
 	$("body").on('click', '.saveService',function(){
+		var singleServiceData = {
+			'serviceName' : $(this).siblings(".serviceName").val(),
+			'serviceTime' : $(this).siblings(".serviceTime").val(),
+			'serviceColor' : $(this).siblings(".serviceColor").val(),
+			'serviceId' : $(this).attr("id")
+		};
 		$.ajax({
-			url : "http://easypack1.hekko24.pl/fullc/database/updateService.php",
+			url : databaseQueryPath,
 			type : "POST",
 			data : {
-				'serviceName' : $(this).siblings(".serviceName").val(),
-				'serviceTime' : $(this).siblings(".serviceTime").val(),
-				'serviceColor' : $(this).siblings(".serviceColor").val(),
-				'serviceId' : $(this).attr("id")
+				'task' : 'saveSingleService',
+				'singleServiceData' : singleServiceData
 			},
 			success : alert("zapisano zmiany")
 		});
 	});
 
 	$("body").on('click', '.deleteService', function(){
-		console.log("is clicked");
 		var serviceId = $(this).attr('id');
 		var serviceName = $(this).siblings(".serviceName").val();
     $('<div></div>').appendTo('body')
@@ -78,9 +89,10 @@ $(document).ready(function() {
         buttons: {
             Tak: function () {
                 $.ajax({
-					url : "http://easypack1.hekko24.pl/fullc/database/deleteService.php",
+					url :databaseQueryPath,
 					data : {
-						'id' : serviceId
+						'serviceId' : serviceId,
+						'task' : 'deleteService'
 					},
 					type : "POST",
 					success : function(){
@@ -116,11 +128,15 @@ $(function () {
 					"index" : order.indexOf($(this).attr("id"))				
 				};
 				sortables.push(data);
+				
 			});
+			console.log(sortables);
 			$.ajax({
-				data: { 'mydata' : sortables},
+				data: { 'saveServicesData' : sortables,
+						'task' : 'saveServices'
+					},
 				type: 'POST',
-                url: 'http://easypack1.hekko24.pl/fullc/database/saveServices.php'
+                url: databaseQueryPath
            }); 
         }
     }).disableSelection();

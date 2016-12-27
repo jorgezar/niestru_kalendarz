@@ -32,4 +32,7 @@ function create_activation_string($username,$useremail){
 	return md5($useremail . $username . "secret_ingredient");
 		
 }
+function write_to_log($data){
+	file_put_contents("log.txt", $data."\n", FILE_APPEND);
+}
 ?>
