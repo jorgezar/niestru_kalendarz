@@ -12,7 +12,7 @@
 <script src='callendar/fullcalendar/fullcalendar.min.js'></script>
 <script src='callendar/locale/pl.js'></script>
 <script src='callendar/lib/jquery-ui.js'></script>
-<script src='callendar/locale/pl.js'></script>
+<script src='callendar/js/popupDialog.js'></script>
 <script src='callendar/js/touch.min.js'></script>
 <meta name=viewport content="width=device-width, initial-scale=1">
 <script src = "callendar/fullcalendar/calendarMainFunction.js"></script>

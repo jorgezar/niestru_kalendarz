@@ -1,6 +1,8 @@
+var databaseAccessPath = 'http://easypack1.hekko24.pl/niestru/callendar/database/';
 $(document).ready(function() {
 		var weeklyHours = [];
-		$.getJSON('/fullc/database/getWorkingHours.php', function(data){
+		//fetch opening hours for each day
+		$.getJSON(databaseAccessPath+'getWorkingHours.php', function(data){
 		for (i in data){
 			var start = data[i].start;
 			var end = data[i].end;
@@ -9,23 +11,29 @@ $(document).ready(function() {
 			if(startHours.toString().length == 1) {
 				startHours = '0' + startHours.toString();
 			}
+			if(startMinutes.toString().length == 1) {
+				startMinutes = '0' + startMinutes.toString();
+			}
 			var start = startHours +":"+startMinutes;
 			var endMinutes = parseInt(end % 60, 10);
 			var endHours = parseInt(end / 60 % 24, 10);
 			if(endHours.toString().length == 1) {
 				endHours = '0' + endHours.toString();
 			}
+			if(endMinutes.toString().length == 1) {
+				endMinutes = '0' + endMinutes.toString();
+			}
 			var end = endHours +":"+endMinutes;
-			var dayNumber = '[ ' + parseInt(i)+1 + ' ]';
-			var singleDayData= {'dow':dayNumber, 'start':start,'end':end};
+			var dayNumber = +i + +1;
+			var dayOfWeek = '[ ' + dayNumber + ' ]';
+			var singleDayData= {'dow':dayOfWeek, 'start':start,'end':end};
 			weeklyHours.push(singleDayData);
 		}
 	});
 	
-
 	$('#calendar').fullCalendar({
 	allDayDefault:false,
-	events: "/fullc/database/events.php",
+	events: databaseAccessPath + "events.php",
 	header: {
 		left: 'prev,next today',
 		center: 'title',
@@ -58,6 +66,7 @@ $(document).ready(function() {
 					var title = $("#clientName").val();
 					var telephone = $("#clientTelephone").val();
 					$.ajax({
+	//remember to change target script here
 				url:'/fullc/database/add_events.php',
 				data: {'title':title, 'start':start, 'end':end, 'telephone': telephone},
 				type:'POST',

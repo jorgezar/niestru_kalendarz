@@ -2,7 +2,6 @@ var databaseAccessPath = "http://easypack1.hekko24.pl/niestru/callendar/database
 $(document).ready(function(){
 	$.getJSON(databaseAccessPath+"getTimeRange.php", function(data){
 		var activeElement = data[0].range_selected;
-		console.log(activeElement);
 		$(".rangeRadio#" + activeElement + "").prop('checked', true);
 	});
 
