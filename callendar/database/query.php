@@ -1,4 +1,7 @@
+hello
 <?php
+ini_set('display_errors', 'On');
+error_reporting(E_ALL);
 //here we execute deletes, updates, inserts comming from ajax
 //selects are executed from standalone scripts as they need to echo json to a url
 include_once("connection.php");
@@ -23,6 +26,22 @@ if(isset($_POST['updateHoursData']) && $_POST['task'] == 'updateWorkingHours'){
 }
 if(isset($_POST['timePoint']) && $_POST['task'] == 'updateTimeRange'){
 	updateTimeRange($_POST['timePoint']);
+}
+if(isset($_POST['eventData']) && $_POST['task'] == 'addNewEvent'){
+	addNewEvent($_POST['eventData']);
+}
+function addNewEvent($data){
+	$title = sanitize($data['title']);
+	$start = sanitize($data['start']);
+	$end = sanitize($data['end']);
+	$telephone = sanitize($data['telephone']);
+	foreach($data['services'] as $service){
+		$service = sanitize($service);
+	}
+	$services = implode(",", $data['services']);
+	$sql = "INSERT INTO `evenement` (`title`, `start`, `end`, `telephone`, `services`) VALUES ('$title', '$start', '$end', '$telephone', '$services')";
+	write_to_log($sql);
+	db_query($sql);
 }
 function updateTimeRange($data){
 	$data = sanitize($data);

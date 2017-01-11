@@ -10,18 +10,4 @@ $(document).ready(function(){
 			$("#services").append(myHTML);
 		}
 	});
-	var totalServiceTime = 0;
-	$("input:checkbox.serviceListItem").each(function(){
-		var thisTime = (this.checked ? $(this).attr("serviceTime") : 0);
-		totalServiceTime = totalServiceTime + thisTime;
-	});
-	$("#services").on('change', ':checkbox', function(){
-		if($(this).is(":checked")){
-			totalServiceTime = totalServiceTime + parseInt($(this).attr("serviceTime"));
-			$("span#serviceTimeCounter").text(totalServiceTime + " min");
-		} else if (!$(this).is(":checked")) {
-			totalServiceTime = totalServiceTime - parseInt($(this).attr("serviceTime"));
-			$("span#serviceTimeCounter").text(totalServiceTime + " min");
-		}
-	});
 });

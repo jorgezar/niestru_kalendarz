@@ -7,15 +7,17 @@
 <link rel='stylesheet' href='callendar/css/panel.css' />
 <link href="css/font-awesome.css" rel="stylesheet">
 <link href='callendar/lib/cupertino/jquery-ui.min.css' rel='stylesheet' />
-<script src='callendar/lib/moment.min.js'></script>
 <script src='callendar/lib/jquery.min.js'></script>
-<script src='callendar/fullcalendar/fullcalendar.min.js'></script>
-<script src='callendar/locale/pl.js'></script>
 <script src='callendar/lib/jquery-ui.js'></script>
-<script src='callendar/js/popupDialog.js'></script>
+<script src='callendar/lib/moment.min.js'></script>
+<script src='callendar/fullcalendar/fullcalendar.min.js'></script>
+<script src="callendar/fullcalendar/calendarMainFunction.js"></script>
+<script src='callendar/fullcalendar/pl.js'></script>
 <script src='callendar/js/touch.min.js'></script>
+<script src='callendar/js/popupDialog.js'></script>
+
 <meta name=viewport content="width=device-width, initial-scale=1">
-<script src = "callendar/fullcalendar/calendarMainFunction.js"></script>
+
 
 </head>
 
@@ -40,7 +42,10 @@
 
 	<div id="eventContent" title="Event Details" style="display:none;">
 	Początek: <span id="startTime"></span><br>
-    Koniec: <span id="endTime"></span><br><br>
+    Koniec: <span id="endTime"></span><br>
+	Czas rezerwacji:
+	<div id='eventDuration'></div>Minut<br>
+	Usługi: <span id="servicesList"></span><br>
     <p id="eventInfo"></p>
  </div>
 	<div id="eventDialog" title="eventDialogForm" style="display:none;">
@@ -51,6 +56,10 @@
 			<input type='text' id='clientTelephone' name='clientTelephone'><br>
 			<div id='eventStart'></div>
 			<div id='eventEnd'></div>
+			<div id='counterHolder'>
+			Czas trwania (minuty):<br>
+			<input type='number' min=0 id='eventTimeCounter'></div>
+			
 			<span id='serviceTimeCounter'></span>
 			<div id='services'></div>
 		</form>

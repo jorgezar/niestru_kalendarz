@@ -1,8 +1,30 @@
+
 var databaseAccessPath = 'http://easypack1.hekko24.pl/niestru/callendar/database/';
+function getServices(){
+	return $.ajax({
+		url : databaseAccessPath+"services.php",
+		dataType : 'json',
+		type: "POST"
+	});
+}
 $(document).ready(function() {
-		var weeklyHours = [];
+	var servicesInDB = [];
+	var servicesPromise = getServices();	
+	servicesPromise.done(function(mydata){
+		for (var i in mydata){
+			var singleService = {
+					'id' : mydata[i].serviceId,
+					'name' : mydata[i].serviceName,
+					'time' : mydata[i].serviceTime,
+					'color' : mydata[i].serviceColor
+				};
+				servicesInDB.push(singleService);
+		}
+	});
+
+	var weeklyHours = [];
 		//fetch opening hours for each day
-		$.getJSON(databaseAccessPath+'getWorkingHours.php', function(data){
+	$.getJSON(databaseAccessPath+'getWorkingHours.php', function(data){
 		for (i in data){
 			var start = data[i].start;
 			var end = data[i].end;
@@ -33,6 +55,7 @@ $(document).ready(function() {
 	
 	$('#calendar').fullCalendar({
 	allDayDefault:false,
+	//fetch events from JSON file at server
 	events: databaseAccessPath + "events.php",
 	header: {
 		left: 'prev,next today',
@@ -41,7 +64,7 @@ $(document).ready(function() {
 	},
 	editable: true,
 	eventLimit: true, // allow "more" link when too many events
-	locale:"pl",
+	locale:'pl',
 	navLinks: true, // can click day/week names to navigate views
 	selectable: true,
 	selectHelper: true,
@@ -54,53 +77,111 @@ $(document).ready(function() {
 		} else {
 		var start = $.fullCalendar.moment(start).format();
 		$("#eventStart").text("Początek: " + start);
-		//czas wydarzenia wyliczymy wg. dodanych usług 
-		//i wyświetlimy w dialogu 
-		//end = start + input
-		var end = $.fullCalendar.moment(end).format();
+		var totalServiceTime = 0;
+		$("input:checkbox.serviceListItem").each(function(){
+			var thisTime = (this.checked ? $(this).attr("serviceTime") : 0);
+			totalServiceTime = totalServiceTime + thisTime;
+		});
+		$("#services").on('change', ':checkbox', function(){
+			if($(this).is(":checked")){
+				totalServiceTime = totalServiceTime + parseInt($(this).attr("serviceTime"));
+				$("#eventTimeCounter").val(totalServiceTime);
+//				$("span#serviceTimeCounter").text(totalServiceTime + " min");
+//				$("#eventEnd").text("Koniec: " + totalServiceTime);
+			} else if (!$(this).is(":checked")) {
+				totalServiceTime = totalServiceTime - parseInt($(this).attr("serviceTime"));
+				$("#eventTimeCounter").val(totalServiceTime);
+//				$("span#serviceTimeCounter").text(totalServiceTime + " min");
+//				$("#eventEnd").text("Koniec: " + totalServiceTime);
+			}
+		});
+		
+//		$("#eventEnd").text("Koniec: " + totalServiceTime);
 		$("#eventDialog").dialog({
 			modal:true,
 			title:'dodaj rezerwację',
 			buttons:{
 				"DODAJ":function(){
-					var title = $("#clientName").val();
-					var telephone = $("#clientTelephone").val();
+					var serviceIds = [];
+					$(".serviceListItem").each(function(){
+						var serviceCheckbox = $(this).find(".serviceLabel");
+						if(serviceCheckbox.is(":checked")){
+							var serviceId = $(this).find(".serviceLabel");
+							serviceIds.push(serviceId.attr("value"));
+						}
+					});
+					var end = moment(start).format();
+					end = moment(end).add(totalServiceTime, 'minute');
+					var newEventData = {
+						'title' : $("#clientName").val(),
+						'start' : start.toString(),
+						'end' : end.format(),
+						'telephone' : $("#clientTelephone").val(),
+						'services' : serviceIds
+					};
 					$.ajax({
-	//remember to change target script here
-				url:'/fullc/database/add_events.php',
-				data: {'title':title, 'start':start, 'end':end, 'telephone': telephone},
-				type:'POST',
-				success: function(json) {
-					console.log(title+'XX'+start+'XX'+end+'XX'+telephone);
+						url: databaseAccessPath + 'query.php',
+						data: {
+							'eventData' : newEventData,
+							'task' : 'addNewEvent'
+							},
+						type:'POST',
+						success: function(json) {
 				},
 			});
+					
 					$('#calendar').fullCalendar( 'refetchEvents' );
 					$("#eventDialog").dialog("close");					
 			}
 			}
 		});
-			$('#calendar').fullCalendar('renderEvent', true); // stick? = true
+		//$('#calendar').fullCalendar('renderEvent'); // stick? = true
 			}
-			$('#calendar').fullCalendar('unselect');
+		$('#calendar').fullCalendar('unselect');
 			
 	},
 
 	eventRender: function(event, element, view) {
 	element.attr('href', 'javascript:void(0);');
 	element.click(function(){
-		$("#startTime").html(moment(event.start).format('MMM Do H:mm A'));
-		$("#endTime").html(moment(event.end).format('MMM Do H:mm A'));
+	
+		var start = moment(event.start).format('MMM Do H:mm A');
+		var end = moment(event.end).format('MMM Do H:mm A');
+		var duration = moment(event.end).diff(moment(event.start), 'minutes');
+		$("<input />", {
+			'type' : 'number',
+			'min' : 1,
+			'value' : duration,
+			'id' : 'eventDurationInput'
+		}).appendTo("#eventDuration");
+		$("#startTime").html(start);
+		$("#endTime").html(end);
+		var eventServicesArray = event.services.split(',');
+		for(var service in eventServicesArray){
+			var serviceDesc = '';
+			for(var i in servicesInDB){
+				if(eventServicesArray[service] == servicesInDB[i].id){
+					$("<li />", {
+					'text' : servicesInDB[i].name,
+					'class' : 'dialogShowService',
+					'id' : 'service_'+servicesInDB[i].id
+					}).appendTo("#eventInfo");
+					break;
+				} else {
+					serviceDesc = 'Nie udało sie dopasować usługi do opisu. Być może została usunęta z bazy danych.';
+				}
+			}
+			
+		}
+		$("#servicesList").html(event.services);
 		$("#eventInfo").html(event.description);
 		$("#eventContent").dialog({ 
 			modal:true, 
 			title: event.title,
 			buttons:{
-				"EDYTUJ": function() {
-					alert("funkcja zostanie napisana później");
+				"ZAPISZ": function() {
+					alert("tutaj funkcja zapisująca zmiany do bazy");
 				},
-				"ZAMKNIJ": function() {
-					$("#eventContent").dialog("close");
-					},
 				"USUŃ": function(){
 					$.ajax({
 						url:'/fullc/database/delete.php',
@@ -153,9 +234,6 @@ dayRender: function(date, cell) {
 			});
 	},
 	businessHours: weeklyHours,
-
-	
-
 			
 	});
 });
