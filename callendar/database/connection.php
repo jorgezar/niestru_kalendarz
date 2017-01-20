@@ -2,7 +2,7 @@
 error_reporting(E_ALL);
 function db_connect() {
 	static $connection;
-	$includepath = '/home/jorgezar/domains/easypack1.hekko24.pl/include/config.ini';
+	$includepath = '/var/www/include/config.ini';
 	if(!isset($connection)){
 		$config = parse_ini_file($includepath);
 		$connection = mysqli_connect('localhost', $config['username'], $config['password'],$config['dbname']);

@@ -1,6 +1,6 @@
-var databaseAccessPath = 'http://easypack1.hekko24.pl/niestru/callendar/database/';
+//var databaseAccessPath = '195.62.13.113/niestru_kalendarz/callendar/database/';
 $(document).ready(function(){
-	$.getJSON(databaseAccessPath + "services.php", function(data){
+	$.getJSON("callendar/database/services.php", function(data){
 		for(i in data){
 			var serviceId = data[i].serviceId;
 			var serviceName = data[i].serviceName;

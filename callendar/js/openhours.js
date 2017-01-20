@@ -7,9 +7,8 @@ var weekDays = {
 	5 : 'sobota',
 	6 : 'niedziela'
 }
-var databaseAccessPath = "http://easypack1.hekko24.pl/niestru/callendar/database/";
 $(document).ready(function(){
-	$.getJSON(databaseAccessPath+'getWorkingHours.php', function(data){
+	$.getJSON('callendar/database/getWorkingHours.php', function(data){	
 	for (i in data) {
 		var isOpen = data[i].open;
 		if (isOpen == 1){
@@ -80,7 +79,7 @@ $(document).ready(function(){
 			sliderData.push(data);
 				});
 		$.ajax({
-			url : databaseAccessPath+"query.php",
+			url : "callendar/database/query.php",
 			data : {
 				'updateHoursData' : sliderData,
 				'task' : 'updateWorkingHours'

@@ -1,8 +1,8 @@
-
-var databaseAccessPath = 'http://easypack1.hekko24.pl/niestru/callendar/database/';
+//name for subdomain
+var databaseAccessPath = '/niestru_kalendarz';
 function getServices(){
 	return $.ajax({
-		url : databaseAccessPath+"services.php",
+		url : "callendar/database/services.php",
 		dataType : 'json',
 		type: "POST"
 	});
@@ -24,7 +24,7 @@ $(document).ready(function() {
 
 	var weeklyHours = [];
 		//fetch opening hours for each day
-	$.getJSON(databaseAccessPath+'getWorkingHours.php', function(data){
+	$.getJSON('callendar/database/getWorkingHours.php', function(data){
 		for (i in data){
 			var start = data[i].start;
 			var end = data[i].end;
@@ -56,7 +56,7 @@ $(document).ready(function() {
 	$('#calendar').fullCalendar({
 	allDayDefault:false,
 	//fetch events from JSON file at server
-	events: databaseAccessPath + "events.php",
+	events: "callendar/database/events.php",
 	header: {
 		left: 'prev,next today',
 		center: 'title',
@@ -86,17 +86,12 @@ $(document).ready(function() {
 			if($(this).is(":checked")){
 				totalServiceTime = totalServiceTime + parseInt($(this).attr("serviceTime"));
 				$("#eventTimeCounter").val(totalServiceTime);
-//				$("span#serviceTimeCounter").text(totalServiceTime + " min");
-//				$("#eventEnd").text("Koniec: " + totalServiceTime);
 			} else if (!$(this).is(":checked")) {
 				totalServiceTime = totalServiceTime - parseInt($(this).attr("serviceTime"));
 				$("#eventTimeCounter").val(totalServiceTime);
-//				$("span#serviceTimeCounter").text(totalServiceTime + " min");
-//				$("#eventEnd").text("Koniec: " + totalServiceTime);
 			}
 		});
 		
-//		$("#eventEnd").text("Koniec: " + totalServiceTime);
 		$("#eventDialog").dialog({
 			modal:true,
 			title:'dodaj rezerwację',
@@ -120,7 +115,7 @@ $(document).ready(function() {
 						'services' : serviceIds
 					};
 					$.ajax({
-						url: databaseAccessPath + 'query.php',
+						url: 'callendar/database/query.php',
 						data: {
 							'eventData' : newEventData,
 							'task' : 'addNewEvent'
@@ -148,24 +143,29 @@ $(document).ready(function() {
 		var start = moment(event.start).format('MMM Do H:mm A');
 		var end = moment(event.end).format('MMM Do H:mm A');
 		var duration = moment(event.end).diff(moment(event.start), 'minutes');
-		$("<input />", {
+		var eventDuration = $("<input />", {
 			'type' : 'number',
 			'min' : 1,
 			'value' : duration,
 			'id' : 'eventDurationInput'
-		}).appendTo("#eventDuration");
+		});
+		$("#eventDuration").html(eventDuration);
 		$("#startTime").html(start);
 		$("#endTime").html(end);
+		$("#clientName").html(event.title);
+		$("#clientTelephone").html(event.telephone);
 		var eventServicesArray = event.services.split(',');
+		var serviceList = [];
 		for(var service in eventServicesArray){
 			var serviceDesc = '';
 			for(var i in servicesInDB){
 				if(eventServicesArray[service] == servicesInDB[i].id){
-					$("<li />", {
+					var serviceDesc = $("<li />", {
 					'text' : servicesInDB[i].name,
 					'class' : 'dialogShowService',
 					'id' : 'service_'+servicesInDB[i].id
-					}).appendTo("#eventInfo");
+					});
+					serviceList.push(serviceDesc);
 					break;
 				} else {
 					serviceDesc = 'Nie udało sie dopasować usługi do opisu. Być może została usunęta z bazy danych.';
@@ -173,6 +173,7 @@ $(document).ready(function() {
 			}
 			
 		}
+		$("#eventInfo").html(serviceList);
 		$("#servicesList").html(event.services);
 		$("#eventInfo").html(event.description);
 		$("#eventContent").dialog({ 
@@ -183,9 +184,11 @@ $(document).ready(function() {
 					alert("tutaj funkcja zapisująca zmiany do bazy");
 				},
 				"USUŃ": function(){
-					$.ajax({
-						url:'/fullc/database/delete.php',
-						data:{'id': event.id},
+					var askUser = confirm("Naprawdę usunąć tą rezerwację?");
+					if(askUser){
+						$.ajax({
+						url:'callendar/database/query.php',
+						data:{'id': event.id, 'task': 'deleteEvent'},
 						type:'POST',
 						success: function(json) {
 							alert('Usunięto wydarzenie');
@@ -193,6 +196,7 @@ $(document).ready(function() {
 							$("#eventContent").dialog("close");	
 							}
 						});
+					}
 					}
 				}
 			});

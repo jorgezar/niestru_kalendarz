@@ -1,9 +1,9 @@
-var databaseQueryPath = 'http://easypack1.hekko24.pl/niestru/callendar/database/query.php'
+var databaseQueryPath = '195.62.13.113/niestru_kalendarz/callendar/database/query.php'
 
 $(document).ready(function() {
     var wrapper         = $(".input_fields_wrap"); //Fields wrapper
     var add_button      = $(".add_field_button"); //Add button ID
-	$.getJSON('/niestru/callendar/database/services.php', function(data){
+	$.getJSON('/niestru_kalendarz/callendar/database/services.php', function(data){
 		for (i in data){
 			var serviceId = data[i].serviceId;
 			var serviceName = data[i].serviceName;

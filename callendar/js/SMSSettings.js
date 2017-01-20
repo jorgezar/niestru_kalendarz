@@ -1,3 +1,5 @@
+var databaseAccessPath = '195.62.13.113/niestru_kalendarz/callendar/js/';
+
 function showSMSOptions(showHide){
 	var html = document.getElementById('SMSOptions');
 	var SMSForm = document.createElement('form');
@@ -7,7 +9,7 @@ function showSMSOptions(showHide){
 	html.insertBefore(formHeader, html.childNodes[0]);
 	var checkboxContainer = document.createElement('div');
 	
-	$.getJSON('http://easypack1.hekko24.pl/fullc/js/SMSOptions.json', function(data){
+	$.getJSON(databaseAccessPath+'SMSOptions.json', function(data){
 		for (i in data){
 			var $checkbox = $(document.createElement('input')).attr({
 			id : 'checkbox'+(parseInt(i)+1),

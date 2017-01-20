@@ -41,6 +41,8 @@
 </div>
 
 	<div id="eventContent" title="Event Details" style="display:none;">
+	Imię klienta: <span id='clientName'></span><br>
+	Telefon: <span id='clientTelephone'></span><br>
 	Początek: <span id="startTime"></span><br>
     Koniec: <span id="endTime"></span><br>
 	Czas rezerwacji:

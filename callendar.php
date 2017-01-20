@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,9 +9,12 @@
 
 
 <?php include('modules/menu/menulog.php'); ?>	
-
-
 <?php 
+ini_set('display_errors', 'On');
+error_reporting(E_ALL | E_STRICT);
+?>
+
+<?php
 //include callendar if logged in, else blank
 $logged = true;
 if($logged) {

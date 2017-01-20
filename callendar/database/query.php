@@ -1,9 +1,10 @@
-hello
 <?php
 ini_set('display_errors', 'On');
 error_reporting(E_ALL);
-//here we execute deletes, updates, inserts comming from ajax
-//selects are executed from standalone scripts as they need to echo json to a url
+/* general script for performing queries to database
+here we execute deletes, updates, inserts comming from ajax
+selects are executed from standalone scripts as they need to echo json to a url
+*/
 include_once("connection.php");
 if(isset($_POST['saveServicesData']) && $_POST['task'] == 'saveServices'){
 	if(save_services_order($_POST['saveServicesData']) > 0){
@@ -30,6 +31,14 @@ if(isset($_POST['timePoint']) && $_POST['task'] == 'updateTimeRange'){
 if(isset($_POST['eventData']) && $_POST['task'] == 'addNewEvent'){
 	addNewEvent($_POST['eventData']);
 }
+if(isset($_POST['id']) && $_POST['task'] == 'deleteEvent'){
+	deleteEvent($_POST['id']);
+}
+function deleteEvent($id){
+	$id = sanitize($id);
+	$sql = "DELETE FROM evenement WHERE id='$id'";
+	db_query($sql);
+}
 function addNewEvent($data){
 	$title = sanitize($data['title']);
 	$start = sanitize($data['start']);
@@ -40,7 +49,6 @@ function addNewEvent($data){
 	}
 	$services = implode(",", $data['services']);
 	$sql = "INSERT INTO `evenement` (`title`, `start`, `end`, `telephone`, `services`) VALUES ('$title', '$start', '$end', '$telephone', '$services')";
-	write_to_log($sql);
 	db_query($sql);
 }
 function updateTimeRange($data){
