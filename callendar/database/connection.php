@@ -2,7 +2,10 @@
 error_reporting(E_ALL);
 function db_connect() {
 	static $connection;
-	$includepath = '/var/www/include/config.ini';
+//	$includepath = '/var/www/include/config.ini';
+	$includepath = 'config.ini';
+
+
 	if(!isset($connection)){
 		$config = parse_ini_file($includepath);
 		$connection = mysqli_connect('localhost', $config['username'], $config['password'],$config['dbname']);
@@ -26,7 +29,7 @@ function sanitize($input){
 	return mysqli_real_escape_string($connection, $input);
 }
 function redirect_user_politely(){
-	echo "<div class='userRedirect'><a href='http://easypack1.hekko24.pl/niestru'>Powrót na główną</a></div>";
+	echo "<div class='userRedirect'><a href='".$_SERVER['DOCUMENT_ROOT']."'>Powrót na główną</a></div>";
 }
 function create_activation_string($username,$useremail){
 	return md5($useremail . $username . "secret_ingredient");
