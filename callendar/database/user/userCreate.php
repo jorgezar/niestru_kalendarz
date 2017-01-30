@@ -1,9 +1,10 @@
 <?php
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
+echo $_SERVER['HTTP_HOST']."<br>";
 error_reporting(E_ALL);
-include_once($_SERVER['DOCUMENT_ROOT'] . "/niestru/callendar/lib/mailer/PHPMailerAutoload.php");
-include_once($_SERVER['DOCUMENT_ROOT'] . "/niestru/callendar/database/connection.php");
+include_once($_SERVER['DOCUMENT_ROOT'] . "/niestru_kalendarz/callendar/lib/mailer/PHPMailerAutoload.php");
+include_once($_SERVER['DOCUMENT_ROOT'] . "/niestru_kalendarz/callendar/database/connection.php");
 if(isset($_POST)){
 	$timestamp = date_timestamp_get(date_create());
 	$usertelephone = $_POST['usertelephone'];
@@ -30,7 +31,7 @@ function insert_new_user($username, $password, $useremail, $usertelephone, $time
 }
 function send_activation_email($username, $useremail) {
 	$activation_string = create_activation_string($username, $useremail);
-	$url = "http://easypack1.hekko24.pl/niestru/account/activate.php?user=" . $useremail . "&data=" . $activation_string;
+	$url = $_SERVER['HTTP_HOST'] . "/niestru_kalendarz/account/activate.php?user=" . $useremail . "&data=" . $activation_string;
 	$message = "Witaj, " . $username . "! Wejdź pod ten adres aby aktywować swoje konto: \n " . $url;
 	$mail = new PHPMailer;
 	$mail->Host = "mail.easypack1.hekko24.pl";

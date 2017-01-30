@@ -41,7 +41,7 @@
 </div>
 
 	<div id="eventContent" title="Event Details" style="display:none;">
-	Imię klienta: <span id='clientName'></span><br>
+	Imię klienta: <div id='clientName'></div><br>
 	Telefon: <span id='clientTelephone'></span><br>
 	Początek: <span id="startTime"></span><br>
     Koniec: <span id="endTime"></span><br>
@@ -51,7 +51,7 @@
     <p id="eventInfo"></p>
  </div>
 	<div id="eventDialog" title="eventDialogForm" style="display:none;">
-		<form action='' method='post'>
+		<form>
 			<label>Imię klienta:</label>
 			<input type='text' id='clientName' name='clientName'><br>
 			<label>Telefon:</label>

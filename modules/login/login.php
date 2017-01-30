@@ -1,6 +1,6 @@
 <div class='login' id='loginWidget'>
 <?php 
-include_once("/home/jorgezar/domains/easypack1.hekko24.pl/public_html/niestru/callendar/database/connection.php");
+include_once("/var/www/html/niestru_kalendarz/callendar/database/connection.php");
 if(isset($_SESSION['user'])){
 	$user = $_SESSION['user'];
 	echo 'Witaj, ' . $user . "!";

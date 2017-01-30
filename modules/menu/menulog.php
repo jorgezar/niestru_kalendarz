@@ -54,7 +54,8 @@ $(document).ready(function(){
     </ul>
     <h5>Kontakt</h5>
     <ul>
-      <li><a href="tel:+48 795 797 259"><i class="fa fa-phone-square"></i> +48 898 676 543</a></li>
+      <li><i class="fa fa-phone-square"></i>+48 795 797 259</li>
+      <li><i class="fa fa-phone-square"></i> +48 660 962 041</li>
       <li><a href=""mailto: adres e-mail"><i class="fa fa-envelope"></i> adres@mail.pl</a></li>
     </ul>
    </div>

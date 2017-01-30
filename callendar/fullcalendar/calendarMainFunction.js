@@ -52,7 +52,7 @@ $(document).ready(function() {
 			weeklyHours.push(singleDayData);
 		}
 	});
-	
+	//main function to render calendar and handle callbacks
 	$('#calendar').fullCalendar({
 	allDayDefault:false,
 	//fetch events from JSON file at server
@@ -139,21 +139,48 @@ $(document).ready(function() {
 	eventRender: function(event, element, view) {
 	element.attr('href', 'javascript:void(0);');
 	element.click(function(){
-	
 		var start = moment(event.start).format('MMM Do H:mm A');
 		var end = moment(event.end).format('MMM Do H:mm A');
 		var duration = moment(event.end).diff(moment(event.start), 'minutes');
-		var eventDuration = $("<input />", {
+		var dialogContainer = $(document.createElement("div")); 
+		var nameInput = $("<input />", {
+			'type' : 'text',
+			'id' : 'clientNameInput',
+			'value' : event.title		
+		});
+		var nameInputLabel = $("<div />", {
+			'text' : 'Nazwa klienta: ' 
+			});
+		nameInputLabel.append(nameInput).appendTo(dialogContainer);
+		var telephoneInputLabel = $("<div />", {
+			'text' : "Numer telefonu: "
+		});
+		var telephoneInput = $("<input />", {
+			'type' : 'tel',
+			'value' : event.telephone,
+			'id' : 'clientTelephoneInput'
+		});
+		telephoneInputLabel.append(telephoneInput).appendTo(dialogContainer);
+		var durationInput = $("<input />", {
 			'type' : 'number',
 			'min' : 1,
 			'value' : duration,
 			'id' : 'eventDurationInput'
 		});
-		$("#eventDuration").html(eventDuration);
+		var durationInputLabel = $("<div />", {
+			'text' : "Czas usługi: "
+		})
+		durationInputLabel.append(durationInput).appendTo(dialogContainer);
+		dialogContainer.dialog();
+		var startTime = $("<div />", {
+			'text' : "Rozpoczęcie: "+start,
+			'id' : 'startTime'
+		});
+		startTime.appendTo(dialogContainer);
 		$("#startTime").html(start);
 		$("#endTime").html(end);
-		$("#clientName").html(event.title);
-		$("#clientTelephone").html(event.telephone);
+		$("#clientName").html(clientName);
+		$("#clientTelephone").html(clientTelephone);
 		var eventServicesArray = event.services.split(',');
 		var serviceList = [];
 		for(var service in eventServicesArray){
@@ -176,7 +203,8 @@ $(document).ready(function() {
 		$("#eventInfo").html(serviceList);
 		$("#servicesList").html(event.services);
 		$("#eventInfo").html(event.description);
-		$("#eventContent").dialog({ 
+		
+/*		$("#eventContent").dialog({ 
 			modal:true, 
 			title: event.title,
 			buttons:{
@@ -199,7 +227,7 @@ $(document).ready(function() {
 					}
 					}
 				}
-			});
+			});*/
 	});
 	//console.log(event.start + event.title + event.end);
     if (event.allDay === 'true') {

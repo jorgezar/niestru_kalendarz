@@ -16,6 +16,7 @@
 		<input id='newUserPass2' placeholder='********' type='password'></br>
 		<span id='createNewAccount'><button>Załóż konto</button></span>
 </div>
+<a href='index.php'><button>Powrót na główną</button></a>
 <script>
 $(document).ready(function(){
 	$("#createNewAccount").on('click', function(){
@@ -50,23 +51,26 @@ $(document).ready(function(){
 			errors.push("hasło musi mieć min 6 znaków");
 		}
 		if(nameValid && passwordValid && emailValid && passwordMatch){
-			alert("valid");
-					//pass data to php script
-					$.ajax({
-						type : "POST",
-						url : "http://easypack1.hekko24.pl/niestru/callendar/database/user/userCreate.php",
-						data : {
+			alert("form data valid");
+			var newUserData = {
 							'usertelephone' : usertelephone,
 							'username' : username,
 							'useremail' : usermail,
 							'password' : password1
-						},
-						success : function(result){
-							alert(result);
-							//alert("Pod podany adres wyślemy link aktywacyjny.");
-						}
-					});
-				} else {
+						};
+					//pass data to php script
+			$.ajax({
+				type : "POST",
+				url : "/niestru_kalendarz/callendar/database/user/userCreate.php",
+				data : {
+					'task' : 'userCreate',
+					'userData' : newUserData
+				},
+				success : function(result){
+					alert(result);
+					}
+				});
+			} else {
 					var errorsList = $("#showSignInErrors")
 					$.each(errors, function(i){
 						var item = $("<li/>")
