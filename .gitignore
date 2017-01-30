@@ -1,7 +1,9 @@
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
-
+# Database connection locals
+callendar/database/config.ini
+callendar/database/connection.php
 # Folder config file
 Desktop.ini
 
